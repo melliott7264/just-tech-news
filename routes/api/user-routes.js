@@ -46,6 +46,7 @@ router.post('/', (req, res) => {
     });
 });
 
+// this route handles user logins with password hashing
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
@@ -56,6 +57,8 @@ router.post('/login', (req, res) => {
             res.status(400).json({message: 'No user with that e-mail address!'});
             return;
         }
+        // checkPassword is a User method that compares a provided password against the hashed password in the database
+        // Check the User model for all the code around password hashing using bcrypt.
         const validPassword = dbUserData.checkPassword(req.body.password);
 
         if (!validPassword) {

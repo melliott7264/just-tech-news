@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt');
 
 class User extends Model {
 
+    // using bcrypt to check a provided password against the hashed password on the database
     checkPassword(loginPw) {
         return bcrypt.compareSync(loginPw, this.password);
     }
@@ -47,6 +48,7 @@ User.init(
         }
     },
     {
+        // these hooks in the User model hash user passwords on creation and update
         hooks: {
             async beforeCreate(newUserData) {
                 newUserData.password = await bcrypt.hash(newUserData.password, 10);
