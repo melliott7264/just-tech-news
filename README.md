@@ -13,11 +13,13 @@ The backend for a new Tech Blog.  We will use Sequelize along with Express and N
 
 ## Installation
 
-Copy down the entire repository to a local folder and run "npm install".   All the dependencies will be installed.  You will have to log into the MySQL shell as root to create the new just_tech_news_db database by running "source ./db/schema.sql".  You may also want to grant privileges on the new database and tables to another user while you are there.   Make sure the credentials for that user are in the .env file to be used by the server on startup to connect to the database.
+Copy down the entire repository to a local folder and run "npm install".   All the dependencies will be installed.  You will have to log into the MySQL shell as root to create the new just_tech_news_db database by running "source ./db/schema.sql".  You may also want to grant privileges on the new database and tables to another user while you are there.   Make sure the credentials for that user are in the .env file to be used by the server on startup to connect to the database.  When you run "npm start" to start the server, Sequelizer will create the tables. 
+
+
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+Run "npm start" from the command line in the root of your application folder to start the server.   This will make the database available to your front end on the api routes.  You can use Insomnia to test these routes; /api/users, /api/posts, /api/comments.   There are routes for GET all, GET one on the id, POST, PUT on the id, and DELETE on the id.   
 
 
 
