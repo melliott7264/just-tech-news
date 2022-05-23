@@ -1,3 +1,6 @@
+// dotenv facilitates the use of environment variables
+require("dotenv").config();
+
 const path = require("path");
 
 const express = require("express");
@@ -9,10 +12,24 @@ const hbs = exphbs.create({});
 const routes = require("./controllers");
 const sequelize = require("./config/connection");
 
+// added for express sessions
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const sess = {
+  // secret: process.env.SESSION_SECRET,
+  secret: "This is a super secret phrase",
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-//added for handlebars
+// middleware for handlebars
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
@@ -22,6 +39,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // sets up a static path for html/css code to be served
 app.use(express.static(path.join(__dirname, "public")));
+
+// middleware for express session
+app.use(session(sess));
 
 app.use(routes);
 
