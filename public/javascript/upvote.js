@@ -8,8 +8,6 @@ async function upvoteClickHandler(event) {
   console.log("button clicked");
 }
 
-console.log("waiting for a click");
-
 document
   .querySelector(".upvote-btn")
   .addEventListener("click", upvoteClickHandler);
