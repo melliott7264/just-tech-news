@@ -1,10 +1,10 @@
-const router = require("express").Router();
+const router = require('express').Router();
 
-const { User, Post, Vote, Comment } = require("../../models");
+const { User, Post, Vote, Comment } = require('../../models');
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   User.findAll({
-    attributes: { exclude: ["password"] },
+    attributes: { exclude: ['password'] },
   })
     .then((dbUserData) => res.json(dbUserData))
     .catch((err) => {
@@ -13,9 +13,9 @@ router.get("/", (req, res) => {
     });
 });
 
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   User.findOne({
-    attributes: { exclude: ["password"] },
+    attributes: { exclude: ['password'] },
     where: {
       id: req.params.id,
     },
@@ -23,29 +23,29 @@ router.get("/:id", (req, res) => {
       // includes post info
       {
         model: Post,
-        attributes: ["id", "title", "post_url", "created_at"],
+        attributes: ['id', 'title', 'post_url', 'created_at'],
       },
       // include Comment info here
       {
         model: Comment,
-        attributes: ["id", "comment_text", "created_at"],
+        attributes: ['id', 'comment_text', 'created_at'],
         include: {
           model: Post,
-          attributes: ["title"],
+          attributes: ['title'],
         },
       },
       // includes each post title voted on
       {
         model: Post,
-        attributes: ["title"],
+        attributes: ['title'],
         through: Vote,
-        as: "voted_posts",
+        as: 'voted_posts',
       },
     ],
   })
     .then((dbUserData) => {
       if (!dbUserData) {
-        res.status(404).json({ message: "No user found with this id" });
+        res.status(404).json({ message: 'No user found with this id' });
         return;
       }
       res.json(dbUserData);
@@ -56,7 +56,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post('/', (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
@@ -68,7 +68,7 @@ router.post("/", (req, res) => {
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
 
-        req.json(dbUserData);
+        res.json(dbUserData);
       });
     })
     .catch((err) => {
@@ -78,14 +78,14 @@ router.post("/", (req, res) => {
 });
 
 // this route handles user logins with password hashing
-router.post("/login", (req, res) => {
+router.post('/login', (req, res) => {
   User.findOne({
     where: {
       email: req.body.email,
     },
   }).then((dbUserData) => {
     if (!dbUserData) {
-      res.status(400).json({ message: "No user with that e-mail address!" });
+      res.status(400).json({ message: 'No user with that e-mail address!' });
       return;
     }
     // checkPassword is a User method that compares a provided password against the hashed password in the database
@@ -93,7 +93,7 @@ router.post("/login", (req, res) => {
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res.status(400).json({ message: "Incorrect password!" });
+      res.status(400).json({ message: 'Incorrect password!' });
       return;
     }
 
@@ -104,12 +104,12 @@ router.post("/login", (req, res) => {
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
 
-      res.json({ user: dbUserData, message: "You are now logged in!" });
+      res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
   });
 });
 
-router.post("/logout", (req, res) => {
+router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
@@ -119,7 +119,7 @@ router.post("/logout", (req, res) => {
   }
 });
 
-router.put("/:id", (req, res) => {
+router.put('/:id', (req, res) => {
   User.update(req.body, {
     individualHooks: true,
 
@@ -129,7 +129,7 @@ router.put("/:id", (req, res) => {
   })
     .then((dbUserData) => {
       if (!dbUserData[0]) {
-        res.status(404).json({ message: "No user found with this id" });
+        res.status(404).json({ message: 'No user found with this id' });
         return;
       }
       res.json(dbUserData);
@@ -140,7 +140,7 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete('/:id', (req, res) => {
   User.destroy({
     where: {
       id: req.params.id,
@@ -148,7 +148,7 @@ router.delete("/:id", (req, res) => {
   })
     .then((dbUserData) => {
       if (!dbUserData) {
-        res.status(404).json({ message: "No user found with this id" });
+        res.status(404).json({ message: 'No user found with this id' });
         return;
       }
       res.json(dbUserData);
