@@ -7,10 +7,14 @@ const express = require('express');
 
 // added for handlebars
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
+// const hbs = exphbs.create({});
 
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
+
+// add handlebar helpers
+const helpers = require('./utils/helpers');
+const hbs = exphbs.create({ helpers });
 
 // added for express sessions
 const session = require('express-session');
