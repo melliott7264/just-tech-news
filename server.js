@@ -21,7 +21,7 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const sess = {
   // secret: process.env.SESSION_SECRET,
-  secret: 'This is a super secret phrase',
+  secret: 'Mary had a secret pink piggie',
   cookie: {},
   resave: false,
   saveUninitialized: true,
