@@ -2,15 +2,9 @@
 
 ## Description
 
-<<<<<<< HEAD
-The backend for a new Tech Blog.  We will use Sequelize along with Express and Node.js to create the server and database for a new tech blog.  Another team will create the client side.   
-
-## Table of Contents 
-=======
 This project is to create a polished, professional tech news blog. This will be a fullstack application, both front-end and back-end. It will be complete with password secured user-sessions, upvoting and comments.
 
 ## Table of Contents
->>>>>>> develop
 
 - [Installation](#installation)
 - [Usage](#usage)
@@ -19,29 +13,17 @@ This project is to create a polished, professional tech news blog. This will be 
 
 ## Installation
 
-<<<<<<< HEAD
-Copy down the entire repository to a local folder and run "npm install".   All the dependencies will be installed.  You will have to log into the MySQL shell as root to create the new just_tech_news_db database by running "source ./db/schema.sql".  You may also want to grant privileges on the new database and tables to another user while you are there.   Make sure the credentials for that user are in the .env file to be used by the server on startup to connect to the database.  When you run "npm start" to start the server, Sequelizer will create the tables. 
-
-
-=======
-Copy down the entire repository to a local folder and run "npm install". All the dependencies will be installed. You will also want to edit the MySQL logon credentials in the .env file.
->>>>>>> develop
+The finished application can be run from Heroku at https://agile-ocean-12999.herokuapp.com so no installation is required.
 
 ## Usage
 
-Run "npm start" from the command line in the root of your application folder to start the server.   This will make the database available to your front end on the api routes.  You can use Insomnia to test these routes; /api/users, /api/posts, /api/comments.   There are routes for GET all, GET one on the id, POST, PUT on the id, and DELETE on the id.   
-
-
+The completed application can be run from Heroku at: https://agile-ocean-12999.herokuapp.com.
 
 ## Credits
 
 Mark Elliott https://github.com/melliott7264
 
-<<<<<<< HEAD
-This was the exercise for the Module 13 lesson on ORM/Sequelize
-=======
-This is an exercise of both Modules 13 and 14 of the Coding Boot Camp at the University of Richmond.
->>>>>>> develop
+This is an exercise of both Modules 13(Express/Sequelize Back-end) and 14(Handlebars front-end) of the Coding Boot Camp at the University of Richmond.
 
 ## License
 
